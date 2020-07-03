@@ -188,7 +188,7 @@ public class SchoolRegistration {
 		lblNewLabel_10.setBounds(334, 314, 132, 14);
 		frame.getContentPane().add(lblNewLabel_10);
 		
-		JLabel lblNewLabel_11 = new JLabel("Number of Kids Enrolled");
+		JLabel lblNewLabel_11 = new JLabel("Number of Children Enrolled");
 		lblNewLabel_11.setFont(new Font("Gadugi", Font.PLAIN, 15));
 		lblNewLabel_11.setBounds(334, 369, 173, 14);
 		frame.getContentPane().add(lblNewLabel_11);
