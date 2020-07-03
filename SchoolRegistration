@@ -1,0 +1,521 @@
+import java.awt.EventQueue;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class SchoolRegistration {
+
+	private JFrame frame;
+	private JTextField sName;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JTextField sSurname;
+	private JTextField sDob;
+	private JTextField sGrade;
+	private JTextField sGender;
+	private JTextField children;
+	private JTextField tfPaddress;
+	private JTextField pNumber;
+	private JTextField pSurname;
+	private JTextField pName;
+	private JTextField tfID;
+	private JLabel lblBackground;
+	private JButton btnAdmin;
+	private JButton btnDelete;
+	private JButton btnSearch;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					SchoolRegistration window = new SchoolRegistration();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public SchoolRegistration() {
+		initialize();
+	}
+
+	/**
+	 * Initialise the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 533, 497);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		
+		sName = new JTextField();
+		sName.setBounds(27, 178, 156, 20);
+		frame.getContentPane().add(sName);
+		sName.setColumns(10);
+
+		lblNewLabel = new JLabel("Mzamomtsha Primary School");
+		lblNewLabel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 26));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(55, 11, 411, 29);
+		frame.getContentPane().add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("Registry Form");
+		lblNewLabel_1.setFont(new Font("Gadugi", Font.PLAIN, 23));
+		lblNewLabel_1.setBounds(191, 51, 133, 29);
+		frame.getContentPane().add(lblNewLabel_1);
+		
+		sSurname = new JTextField();
+		sSurname.setBounds(27, 229, 156, 20);
+		frame.getContentPane().add(sSurname);
+		sSurname.setColumns(10);
+		
+		
+		
+		sDob = new JTextField();
+		sDob.setBounds(27, 280, 156, 20);
+		frame.getContentPane().add(sDob);
+		sDob.setColumns(10);
+		
+		sGrade = new JTextField();
+		sGrade.setBounds(27, 390, 156, 20);
+		frame.getContentPane().add(sGrade);
+		sGrade.setColumns(10);
+		
+		sGender = new JTextField();
+		sGender.setBounds(27, 332, 156, 20);
+		frame.getContentPane().add(sGender);
+		sGender.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("Student Grade");
+		lblNewLabel_2.setFont(new Font("Gadugi", Font.PLAIN, 15));
+		lblNewLabel_2.setBounds(30, 363, 110, 21);
+		frame.getContentPane().add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Student Gender");
+		lblNewLabel_3.setFont(new Font("Gadugi", Font.PLAIN, 15));
+		lblNewLabel_3.setBounds(27, 311, 113, 14);
+		frame.getContentPane().add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("Student DOB");
+		lblNewLabel_4.setFont(new Font("Gadugi", Font.PLAIN, 15));
+		lblNewLabel_4.setBounds(27, 260, 113, 14);
+		frame.getContentPane().add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("Student Surname");
+		lblNewLabel_5.setFont(new Font("Gadugi", Font.PLAIN, 15));
+		lblNewLabel_5.setBounds(27, 209, 126, 14);
+		frame.getContentPane().add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_6 = new JLabel("Student Name");
+		lblNewLabel_6.setFont(new Font("Gadugi", Font.PLAIN, 15));
+		lblNewLabel_6.setBounds(27, 158, 125, 14);
+		frame.getContentPane().add(lblNewLabel_6);
+		
+		
+		
+		JButton btnNewButton = new JButton("SUBMIT.");
+		
+		btnNewButton.setFont(new Font("Gadugi", Font.BOLD, 20));
+		btnNewButton.setBounds(191, 383, 133, 29);
+		frame.getContentPane().add(btnNewButton);
+		
+		children = new JTextField();
+		children.setBounds(334, 390, 156, 20);
+		frame.getContentPane().add(children);
+		children.setColumns(10);
+		
+		tfPaddress = new JTextField();
+		tfPaddress.setBounds(334, 332, 156, 20);
+		frame.getContentPane().add(tfPaddress);
+		tfPaddress.setColumns(10);
+		
+		pNumber = new JTextField();
+		pNumber.setBounds(334, 280, 156, 20);
+		frame.getContentPane().add(pNumber);
+		pNumber.setColumns(10);
+		
+		pSurname = new JTextField();
+		pSurname.setBounds(334, 229, 156, 20);
+		frame.getContentPane().add(pSurname);
+		pSurname.setColumns(10);
+		
+		pName = new JTextField();
+		pName.setBounds(334, 178, 156, 20);
+		frame.getContentPane().add(pName);
+		pName.setColumns(10);
+		
+		JLabel lblNewLabel_7 = new JLabel("Parent Cellphone");
+		lblNewLabel_7.setFont(new Font("Gadugi", Font.PLAIN, 15));
+		lblNewLabel_7.setBounds(334, 262, 126, 17);
+		frame.getContentPane().add(lblNewLabel_7);
+		
+		JLabel lblNewLabel_8 = new JLabel("Parent Surname");
+		lblNewLabel_8.setFont(new Font("Gadugi", Font.PLAIN, 15));
+		lblNewLabel_8.setBounds(334, 211, 132, 17);
+		frame.getContentPane().add(lblNewLabel_8);
+		
+		JLabel lblNewLabel_9 = new JLabel("Parent Name");
+		lblNewLabel_9.setFont(new Font("Gadugi", Font.PLAIN, 15));
+		lblNewLabel_9.setBounds(334, 162, 132, 15);
+		frame.getContentPane().add(lblNewLabel_9);
+		
+		JLabel lblNewLabel_10 = new JLabel("Parent Address");
+		lblNewLabel_10.setFont(new Font("Gadugi", Font.PLAIN, 15));
+		lblNewLabel_10.setBounds(334, 314, 132, 14);
+		frame.getContentPane().add(lblNewLabel_10);
+		
+		JLabel lblNewLabel_11 = new JLabel("Number of Kids Enrolled");
+		lblNewLabel_11.setFont(new Font("Gadugi", Font.PLAIN, 15));
+		lblNewLabel_11.setBounds(334, 369, 173, 14);
+		frame.getContentPane().add(lblNewLabel_11);
+		
+		tfID = new JTextField();
+		tfID.setBounds(216, 112, 86, 20);
+		frame.getContentPane().add(tfID);
+		tfID.setColumns(10);
+		
+		JLabel lblNewLabel_12 = new JLabel("School ID");
+		lblNewLabel_12.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_12.setFont(new Font("Gadugi", Font.PLAIN, 15));
+		lblNewLabel_12.setBounds(216, 91, 86, 14);
+		frame.getContentPane().add(lblNewLabel_12);
+		
+		
+		btnAdmin = new JButton("Admin");
+		btnAdmin.addActionListener(new ActionListener() {
+			int Attempts = 0;
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				int userAttempt = Integer.parseInt(JOptionPane.showInputDialog("Enter Our Favorite Number (1-10)"));
+				
+				if (userAttempt == 11) {
+					
+					btnDelete.setVisible(true);
+				btnSearch.setVisible(true);
+					
+				}
+				else {
+					
+					JOptionPane.showMessageDialog(null, "Incorrect Password!!");
+					Attempts++;
+					if (Attempts == 3) {
+						
+						btnAdmin.setVisible(false);
+					}
+					
+	}
+				
+			}}
+		);
+		btnAdmin.setFont(new Font("Gadugi", Font.PLAIN, 15));
+		btnAdmin.setBounds(475, 16, 32, 29);
+		frame.getContentPane().add(btnAdmin);
+		
+		btnDelete = new JButton("Delete Record");
+		btnDelete.setFont(new Font("Gadugi", Font.PLAIN, 15));
+		btnDelete.setBounds(27, 111, 140, 23);
+		frame.getContentPane().add(btnDelete);
+		btnDelete.setVisible(false);
+		
+		btnSearch = new JButton("Search Record");
+		btnSearch.setFont(new Font("Gadugi", Font.PLAIN, 15));
+		btnSearch.setBounds(350, 111, 140, 23);
+		frame.getContentPane().add(btnSearch);
+		btnSearch.setVisible(false);
+		
+		// Import ImageIcon
+		lblBackground = new JLabel("");
+		lblBackground.setBounds(0, 0, 517, 458);
+		frame.getContentPane().add(lblBackground);
+		ImageIcon iconBackground = new ImageIcon("Images/Background.jpg");
+		lblBackground.setIcon(iconBackground);
+		
+		
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int option = Integer.parseInt(JOptionPane.showInputDialog("Would you like to remove a student or parent? [Type 1(Student) or 2(Parent)]"));
+				int recordNum = Integer.parseInt(JOptionPane.showInputDialog("Please Enter School ID Of Record You Wish To Delete"));
+				
+				// Create a variable for the connection string.
+				String connectionUrl = "jdbc:sqlserver://localhost:1433;"
+						+ "databaseName= Mzamomtsha Primary School;integratedSecurity=true;";
+
+				// Declare the JDBC Objects.
+				Connection con = null;
+				Statement stmt = null;
+
+				if (option == 1) {
+					
+					try {
+						// Establish the connection.
+						Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+						con = DriverManager.getConnection(connectionUrl);
+					
+
+					
+						
+					
+					// Create and execute an SQL statement that returns some data
+					
+					String SQLdelete = "DELETE FROM [dbo].[StudentDetail] WHERE SchoolID = '" + recordNum + "' ";
+					
+
+					stmt = con.createStatement();
+					stmt.execute(SQLdelete);
+					
+
+					System.out.println("Record Was Successfully Deleted");
+
+				}
+					
+				
+				
+
+			catch (Exception e1) {
+
+				e1.printStackTrace();
+			}
+			}else {
+				
+				try {
+					// Establish the connection.
+					Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+					con = DriverManager.getConnection(connectionUrl);
+				
+
+				
+					
+				
+				// Create and execute an SQL statement that returns some data
+				
+				String SQLdelete = "DELETE FROM [dbo].[ParentDetails] WHERE SchoolID = '" + recordNum + "' ";
+				
+
+				stmt = con.createStatement();
+				stmt.execute(SQLdelete);
+				
+
+				System.out.println("Record Was Successfully Deleted");
+
+			}
+				
+			
+			
+
+		catch (Exception e1) {
+
+			e1.printStackTrace();
+		}
+				
+			}
+				
+			}}
+		);
+		
+		
+		
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int option = Integer.parseInt(JOptionPane.showInputDialog("Would you like to search for a student or parent? [Type 1(Student) or 2(Parent)]"));
+				int search = Integer.parseInt(JOptionPane.showInputDialog("Please Enter SchoolID"));
+				
+				
+				// Create a variable for the connection string.
+				String connectionUrl = "jdbc:sqlserver://localhost:1433;"
+						+ "databaseName= Mzamomtsha Primary School;integratedSecurity=true;";
+
+				// Declare the JDBC Objects.
+				Connection con = null;
+				
+				if (option==1) {
+					
+					try {
+						// Establish the connection.
+						Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+						con = DriverManager.getConnection(connectionUrl);
+					
+					
+					
+					// Create and execute an SQL statement that returns some data
+					String SQLSearch = "SELECT * FROM [dbo].[StudentDetail] WHERE SchoolID = '" + search + "'";
+					
+
+					ResultSet rs = con.createStatement().executeQuery(SQLSearch);
+			        while (rs.next()) {
+
+			        	//insert Data into Text fields
+			        	            String sName = rs.getString("stdName");
+			        	            sName.setText(sName);
+
+			        	            String sSurname = rs.getString("stdSurname");
+			        	            sSurname.setText(sSurname);
+			        	            
+			        	            String sDOB = rs.getString("stdDOB");
+			        	            sDob.setText(sDOB);
+			        	            
+			        	            String sGender = rs.getString("stdGender");
+			        	            sGender.setText(sGender);
+			        	            
+			        	            String sGrade = rs.getString("stdGrade");
+			        	            sGrade.setText(sGrade);
+			        	            
+			        	        }
+			        	 
+				}
+
+				catch (Exception e1) {
+
+					JOptionPane.showMessageDialog(null,"Record Was Not Found :{");
+				}
+					
+				}else {
+					
+					try {
+						// Establish the connection.
+						Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+						con = DriverManager.getConnection(connectionUrl);
+					
+					
+					
+					// Create and execute an SQL statement that returns some data
+					String SQLSearch = "SELECT * FROM [dbo].[ParentDetails] WHERE SchoolID = '" + search + "'";
+					
+
+					ResultSet rs = con.createStatement().executeQuery(SQLSearch);
+			        while (rs.next()) {
+
+			        	//insert Data into Text fields
+			        	            String pName = rs.getString("prtName");
+			        	            pName.setText(pName);
+
+			        	            String pSurname = rs.getString("prtSurname");
+			        	            pSurname.setText(pSurname);
+			        	            
+			        	            String pCell = rs.getString("prtCell");
+			        	            pNumber.setText(pCell);
+			        	            
+			        	            String pAddress = rs.getString("prtAddress");
+			        	            tfPaddress.setText(pAddress);
+			        	            
+			        	            String pNCE = rs.getString("prtNCE");
+			        	            children.setText(pNCE);
+			        	            
+			        	        }
+			        	 
+				}
+
+				catch (Exception e1) {
+
+					JOptionPane.showMessageDialog(null,"Record Was Not Found :{");
+				}
+					
+				}
+				
+
+				
+				
+			}
+		});
+		
+		
+		
+
+		
+
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				// Create a variable for the connection string.
+				String connectionUrl = "jdbc:sqlserver://localhost:1433;"
+						+ "databaseName= Mzamomtsha Primary School;integratedSecurity=true;";
+
+				// Declare the JDBC Objects.
+				Connection con = null;
+				Statement stmt = null;
+
+				try {
+					// Establish the connection.
+					Class.forName("jdbc:mysql://localhost:3306/student_db");
+					con = DriverManager.getConnection(connectionUrl);
+                                        
+                                        
+				String student_name = sName.getText();
+				String student_surname = sSurname.getText();
+				String student_dob = sDob.getText();
+				String student_gender = sGender.getText();
+				String student_grade = sGrade.getText();
+				
+				String parent_name = pName.getText();
+				String parent_surname = pSurname.getText();
+				String parent_number = pNumber.getText();
+				String prtAddress = tfPaddress.getText();
+				String parent_children = children.getText();
+				
+				String SchoolID = tfID.getText();
+				
+				// Create and execute an SQL statement that returns some data
+
+
+				System.out.println("Your Info Has Successfully Been Added");
+        try
+        {
+             Class.forName("com.mysql.jdbc.Driver");
+             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/student_db", "zaynab", "09031992");
+             System.out.println("Database Connection Success");
+             
+             String query = "INSERT INTO students VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+             PreparedStatement preparedStmt = con.prepareStatement(query);
+             preparedStmt.setString(1, sName);
+             preparedStmt.setString(2, sSurname);
+             preparedStmt.setString(3, sDob);
+             preparedStmt.setString(4, sGender);
+             preparedStmt.setString(5, sGrade);
+             preparedStmt.setString(6, pName);
+             preparedStmt.setString(7, pSurname);
+             preparedStmt.setString(8, pNumber);
+             preparedStmt.setInt(9, children);
+             preparedStmt.executeUpdate();
+             System.out.println("Record inserted successfully.");
+        } 
+        catch (ClassNotFoundException ex) {Logger.getLogger(SchoolRegistration.class.getName()).log(Level.SEVERE, null, ex);} 
+        catch (SQLException ex) {Logger.getLogger(SchoolRegistration.class.getName()).log(Level.SEVERE, null, ex);}
+			}
+
+			catch (Exception e1) {
+
+				e1.printStackTrace();
+			}
+
+		}
+	});
+
+		}
+			
+			}
